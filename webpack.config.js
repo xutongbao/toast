@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
 	mode: 'development',
-	entry: './src/index.js',
+	entry: './index.js',
 	devtool: 'cheap-source-map',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
