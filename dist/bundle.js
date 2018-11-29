@@ -745,8 +745,8 @@ var Toast =
 /*#__PURE__*/
 function () {
   function Toast(text) {
-    console.log(styles);
-    var tpl = "<div id=\"m-toast\" class=" + styles['m-toast'] + ">\n        <div class=" + styles['m-toast-inner'] + ">\n          <div class=" + styles['m-toast-text'] + ">\n            " + text + "\n          </div>\n        </div>    \n        </div>";
+    var tpl = "<div id=\"m-toast\" class=\"m-toast\"}>\n        <div class=\"m-toast-inner\"}>\n          <div class=\"m-toast-text\"}>\n            " + text + "\n          </div>\n        </div>    \n        </div>";
+    tpl = this.buildTpl(tpl, styles);
     var div = document.createElement('div');
     div.innerHTML = tpl;
     document.body.append(div.childNodes[0]);
@@ -770,6 +770,22 @@ function () {
   return Toast;
 }();
 
+Object.assign(Toast.prototype, {
+  buildTpl: function buildTpl(tpl, styles) {
+    var reg = /class=\".*?\"/g;
+    result = tpl.match(reg);
+
+    for (var i = 0; i < result.length; i++) {
+      var tempReg = /\".*?\"/g;
+      var tempResult = result[i].match(tempReg)[0];
+      tempResult = tempResult.slice(1, tempResult.length - 1);
+      var r = result[i].replace(tempReg, '"' + styles[tempResult] + '"');
+      tpl = tpl.replace(result[i], r);
+    }
+
+    return tpl;
+  }
+});
 module.exports = Toast;
 
 /***/ }),
