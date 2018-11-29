@@ -3,12 +3,15 @@
   Licensed under the MIT License (MIT), see
   https://github.com/xutongbao/toast
 */
+const styles = require('./index.module.scss');
+
 class Toast {
   constructor(text) {
+    console.log(styles);
     let tpl =
-      `<div id="m-toast" style="display:none; position: fixed; width: 100%;top: 0;bottom: 0;right: 0;overflow: auto;text-align: center;">
-        <div style="position: absolute;left:50%;top:50%;width: 100%; transform:translate(-50%,-50%);-webkit-transform:translate(-50%,-50%);text-align: center;">
-          <div style="display: inline-block;margin: 0 22px; padding: 19px 21px;font-size: 16px;color: #FFFFFF;letter-spacing: 0;line-height: 22px;background: rgba(0,0,0,0.72);border-radius: 10px;">
+      `<div id="m-toast" class=${styles['m-toast']}>
+        <div class=${styles['m-toast-inner']}>
+          <div class=${styles['m-toast-text']}>
             ${text}
           </div>
         </div>    
