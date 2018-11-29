@@ -108,13 +108,44 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   Licensed under the MIT License (MIT), see
   https://github.com/xutongbao/toast
 */
+var Toast = __webpack_require__(/*! ./src/index */ "./src/index.js");
 
-/* global define */
+if ( true && module.exports) {
+  Toast.default = Toast;
+  module.exports = Toast;
+} else if (true) {
+  // register as 'toast', consistent with npm package name
+  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+    return Toast;
+  }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+} else {} // if (window && !window.Toast) {
+//   console.err('Please load the Toast script first!');
+// }
+// 
+
+
+module.exports = Toast;
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*!
+  Copyright (c) 2018 Xu Tongbao
+  Licensed under the MIT License (MIT), see
+  https://github.com/xutongbao/toast
+*/
 var Toast =
 /*#__PURE__*/
 function () {
   function Toast(text) {
-    var tpl = "<div id=\"m-toast\" style=\"display:none; position: fixed; width: 100%;top: 0;bottom: 0;right: 0;overflow: auto;text-align: center;\">\n                <div style=\"position: absolute;left:50%;top:50%;width: 100%; transform:translate(-50%,-50%);-webkit-transform:translate(-50%,-50%);text-align: center;\">\n                  <div style=\"display: inline-block;margin: 0 22px; padding: 19px 21px;font-size: 16px;color: #FFFFFF;letter-spacing: 0;line-height: 22px;background: rgba(0,0,0,0.72);border-radius: 10px;\">\n                    " + text + "\n                  </div>\n                </div>    \n              </div>";
+    var tpl = "<div id=\"m-toast\" style=\"display:none; position: fixed; width: 100%;top: 0;bottom: 0;right: 0;overflow: auto;text-align: center;\">\n        <div style=\"position: absolute;left:50%;top:50%;width: 100%; transform:translate(-50%,-50%);-webkit-transform:translate(-50%,-50%);text-align: center;\">\n          <div style=\"display: inline-block;margin: 0 22px; padding: 19px 21px;font-size: 16px;color: #FFFFFF;letter-spacing: 0;line-height: 22px;background: rgba(0,0,0,0.72);border-radius: 10px;\">\n            " + text + "\n          </div>\n        </div>    \n        </div>";
     var div = document.createElement('div');
     div.innerHTML = tpl;
     document.body.append(div.childNodes[0]);
@@ -138,15 +169,7 @@ function () {
   return Toast;
 }();
 
-if ( true && module.exports) {
-  Toast.default = Toast;
-  module.exports = Toast;
-} else if (true) {
-  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-    return Toast;
-  }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-} else {}
+module.exports = Toast;
 
 /***/ })
 

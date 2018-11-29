@@ -30,4 +30,4 @@ class Toast {
   }
 }
 
-export default Toast;
+module.exports = Toast;
