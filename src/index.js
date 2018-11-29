@@ -18,6 +18,8 @@ class Toast {
       this.text = option;
     } else if (optionType === 'object') {
       Object.assign(this, option);
+    } else if (optionType === 'undefined') {
+      this.text = '';
     } else {
       console.error('option error!');
       return;
