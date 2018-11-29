@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,height=device-height">
+  <title>demo05(custom_style)</title>
+  <style>
+  	.m-toast{background: rgba(0,0,0,0.5);}
+  	.m-toast-inner{}
+  	.m-toast-text{border-radius: 0!important;color: #f66f0c!important;}
+  </style>
+</head>
+<body>
+<script src="../dist/bundle.js"></script>
+<script>
+let myToast = new Toast({
+	text: 'hello world!',
+	class: {
+		toast: 'm-toast',
+		toastInner: 'm-toast-inner',
+		toastText: 'm-toast-text'
+	}
+});
+
+myToast.show();
+</script>
+</body>
+</html>

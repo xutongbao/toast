@@ -744,16 +744,38 @@ var styles = __webpack_require__(/*! ./index.module.scss */ "./src/index.module.
 var Toast =
 /*#__PURE__*/
 function () {
-  function Toast(text) {
+  function Toast(option) {
+    this.text = '';
+    this.class = {
+      toast: '',
+      toastInner: '',
+      toastText: ''
+    };
+    var optionType = this.getOptionType(option);
+
+    if (optionType === 'string') {
+      this.text = option;
+    } else if (optionType === 'object') {
+      Object.assign(this, option);
+    } else {
+      console.error('option error!');
+      return;
+    }
+
     var toastID = this.getID(6);
+    var toastInnerID = this.getID(6);
     var toastTextID = this.getID(6);
-    var tpl = "<div id=" + toastID + " class=\"m-toast\"}>\n        <div class=\"m-toast-inner\"}>\n          <div id=" + toastTextID + " class=\"m-toast-text\"}>\n            " + text + "\n          </div>\n        </div>    \n      </div>";
+    var tpl = "<div id=" + toastID + " class=\"m-toast\"}>\n        <div id=" + toastInnerID + " class=\"m-toast-inner\"}>\n          <div id=" + toastTextID + " class=\"m-toast-text\"}>\n            " + this.text + "\n          </div>\n        </div>    \n      </div>";
     tpl = this.buildTpl(tpl, styles);
     var div = document.createElement('div');
     div.innerHTML = tpl;
     document.body.append(div.childNodes[0]);
     this.toastDOM = document.getElementById(toastID);
+    this.toastInnerDOM = document.getElementById(toastInnerID);
     this.toastTextDOM = document.getElementById(toastTextID);
+    this.toastDOM.className += this.class.toast;
+    this.toastInnerDOM.className += this.class.toastInner;
+    this.toastTextDOM.className += this.class.toastText;
   }
 
   var _proto = Toast.prototype;
@@ -792,7 +814,16 @@ Object.assign(Toast.prototype, {
       var tempReg = /\".*?\"/g;
       var tempResult = result[i].match(tempReg)[0];
       tempResult = tempResult.slice(1, tempResult.length - 1);
-      var r = result[i].replace(tempReg, '"' + styles[tempResult] + '"');
+      tempResult = tempResult.split(/\s+/);
+      var myStyle = '';
+
+      for (var j = 0; j < tempResult.length; j++) {
+        if (typeof styles[tempResult[j]] !== 'undefined') {
+          myStyle += styles[tempResult[j]] + ' ';
+        }
+      }
+
+      var r = result[i].replace(tempReg, '"' + myStyle + '"');
       tpl = tpl.replace(result[i], r);
     }
 
@@ -800,6 +831,22 @@ Object.assign(Toast.prototype, {
   },
   getID: function getID(length) {
     return Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
+  },
+  getOptionType: function getOptionType(obj) {
+    var toString = Object.prototype.toString;
+    var map = {
+      '[object Boolean]': 'boolean',
+      '[object Number]': 'number',
+      '[object String]': 'string',
+      '[object Function]': 'function',
+      '[object Array]': 'array',
+      '[object Date]': 'date',
+      '[object RegExp]': 'regExp',
+      '[object Undefined]': 'undefined',
+      '[object Null]': 'null',
+      '[object Object]': 'object'
+    };
+    return map[toString.call(obj)];
   }
 });
 module.exports = Toast;

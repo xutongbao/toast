@@ -56,6 +56,20 @@ setTimeout(function () {
 }, 2000);
 ```
 
+custom style:
+```js
+let myToast = new Toast({
+	text: 'hello world!',
+	class: {
+		toast: 'm-toast',
+		toastInner: 'm-toast-inner',
+		toastText: 'm-toast-text'
+	}
+});
+
+myToast.show();
+```
+
 ## License
 
 [MIT](LICENSE). Copyright (c) 2018 Xu Tongbao.
