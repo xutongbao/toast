@@ -7,34 +7,45 @@ const styles = require('./index.module.scss');
 
 class Toast {
   constructor(text) {
+    let toastID = this.getID(6);
+    let toastTextID = this.getID(6);
     let tpl =
-      `<div id="m-toast" class="m-toast"}>
+      `<div id=${toastID} class="m-toast"}>
         <div class="m-toast-inner"}>
-          <div class="m-toast-text"}>
+          <div id=${toastTextID} class="m-toast-text"}>
             ${text}
           </div>
         </div>    
-        </div>`;        
+      </div>`;        
     tpl = this.buildTpl(tpl, styles);
     let div = document.createElement('div');
     div.innerHTML = tpl;
     document.body.append(div.childNodes[0]);
-    this.dom = document.getElementById('m-toast');
+    this.toastDOM = document.getElementById(toastID);
+    this.toastTextDOM = document.getElementById(toastTextID);
   }
-  show() {
-    if (this.dom) {
-      this.dom.style.display = 'block';
+  show(text) {
+    if (this.toastDOM) {
+      if (typeof text !== 'undefined') {
+        this.toastTextDOM.innerHTML = text;
+      }
+      this.toastDOM.style.display = 'block';
     }
   }
   hide() {
-    if (this.dom) {
-      this.dom.style.display = 'none';
+    if (this.toastDOM) {
+      this.toastDOM.style.display = 'none';
+    }
+  }
+  destory() {
+    if (this.toastDOM) {
+      document.body.removeChild(this.toastDOM);
     }
   }
 }
 
 Object.assign(Toast.prototype, {
-  buildTpl: (tpl, styles) => {
+  buildTpl(tpl, styles) {
     let reg = /class=\".*?\"/g;
     result = tpl.match(reg);
     for (let i = 0; i < result.length; i++) {
@@ -45,7 +56,10 @@ Object.assign(Toast.prototype, {
       tpl = tpl.replace(result[i], r);
     }  
     return tpl;
-  }
+  },
+  getID(length) {
+    return Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
+  }  
 });
 
 module.exports = Toast;

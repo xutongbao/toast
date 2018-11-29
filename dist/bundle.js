@@ -745,25 +745,38 @@ var Toast =
 /*#__PURE__*/
 function () {
   function Toast(text) {
-    var tpl = "<div id=\"m-toast\" class=\"m-toast\"}>\n        <div class=\"m-toast-inner\"}>\n          <div class=\"m-toast-text\"}>\n            " + text + "\n          </div>\n        </div>    \n        </div>";
+    var toastID = this.getID(6);
+    var toastTextID = this.getID(6);
+    var tpl = "<div id=" + toastID + " class=\"m-toast\"}>\n        <div class=\"m-toast-inner\"}>\n          <div id=" + toastTextID + " class=\"m-toast-text\"}>\n            " + text + "\n          </div>\n        </div>    \n      </div>";
     tpl = this.buildTpl(tpl, styles);
     var div = document.createElement('div');
     div.innerHTML = tpl;
     document.body.append(div.childNodes[0]);
-    this.dom = document.getElementById('m-toast');
+    this.toastDOM = document.getElementById(toastID);
+    this.toastTextDOM = document.getElementById(toastTextID);
   }
 
   var _proto = Toast.prototype;
 
-  _proto.show = function show() {
-    if (this.dom) {
-      this.dom.style.display = 'block';
+  _proto.show = function show(text) {
+    if (this.toastDOM) {
+      if (typeof text !== 'undefined') {
+        this.toastTextDOM.innerHTML = text;
+      }
+
+      this.toastDOM.style.display = 'block';
     }
   };
 
   _proto.hide = function hide() {
-    if (this.dom) {
-      this.dom.style.display = 'none';
+    if (this.toastDOM) {
+      this.toastDOM.style.display = 'none';
+    }
+  };
+
+  _proto.destory = function destory() {
+    if (this.toastDOM) {
+      document.body.removeChild(this.toastDOM);
     }
   };
 
@@ -784,6 +797,9 @@ Object.assign(Toast.prototype, {
     }
 
     return tpl;
+  },
+  getID: function getID(length) {
+    return Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
   }
 });
 module.exports = Toast;

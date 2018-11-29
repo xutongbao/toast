@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,height=device-height">
-  <title>demo02</title>
+  <title>demo03(setTimeout)</title>
   <style>
-    
   </style>
 </head>
 <body>
 <script src="../dist/bundle.js"></script>
 <script>
-let myToast = new Toast('hello world!');
-myToast.show();
+let myToast = new Toast();
+myToast.show('new hello world!');
+setTimeout(function () {
+	myToast.destory();
+}, 2000);
 </script>
 </body>
 </html>
