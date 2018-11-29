@@ -24,12 +24,35 @@ yarn add toast-xu
 
 Use with [Node.js](https://nodejs.org/en/), [Browserify](http://browserify.org/), or [webpack](https://webpack.github.io/):
 
+## Examples
+
+Hello World!:
 ```js
-const Toast = require('toast-xu');
-let toast = new Toast('hello world!');
-toast.show();
-setTimeout(()=>{
-  toast.hide();
+let myToast = new Toast('hello world!');
+myToast.show();
+```
+
+New Hello World!:
+```js
+let myToast = new Toast('hello world!');
+myToast.show('new hello world!');
+```
+
+setTimeout:
+```js
+let myToast = new Toast();
+myToast.show('new hello world!');
+setTimeout(function () {
+	myToast.hide();
+}, 2000);
+```
+
+destory():
+```js
+let myToast = new Toast();
+myToast.show('new hello world!');
+setTimeout(function () {
+	myToast.destory();
 }, 2000);
 ```
 
