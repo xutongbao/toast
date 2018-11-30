@@ -774,6 +774,10 @@ function () {
       this.content = this.text;
     }
 
+    if (this.isDOM(this.content)) {
+      this.content = this.domToString(this.content);
+    }
+
     var toastID = this.getID(6);
     var toastInnerID = this.getID(6);
     var toastTextID = this.getID(6);
@@ -862,6 +866,19 @@ Object.assign(Toast.prototype, {
   },
   escapeHtml: function escapeHtml(str) {
     return (str + '').replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  },
+  domToString: function domToString(node) {
+    var tmpNode = document.createElement('div');
+    tmpNode.appendChild(node);
+    var str = tmpNode.innerHTML;
+    tmpNode = node = null; // 解除引用，以便于垃圾回收 
+
+    return str;
+  },
+  isDOM: typeof HTMLElement === 'object' ? function (obj) {
+    return obj instanceof HTMLElement;
+  } : function (obj) {
+    return obj && typeof obj === 'object' && obj.nodeType === 1 && typeof obj.nodeName === 'string';
   }
 });
 module.exports = Toast;
