@@ -128,7 +128,15 @@ myToast.show();
 </script>
 </body>
 </html>
+```
 
+delay:
+```js
+let myToast = new Toast({
+	text: 'hello world!',
+	delay: 1000
+});
+myToast.show();
 ```
 
 ## License

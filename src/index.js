@@ -9,12 +9,13 @@ class Toast {
   constructor(option) {
     this.text = '';
     this.html = '';
+    this.delay = null;
     this.class = {
       toast: '',
       toastInner: '',
       toastText: ''      
     };
-    let optionType = this.getOptionType(option);
+    let optionType = this.getType(option);
     if (optionType === 'string' || optionType === 'number') {
       this.text = option;
     } else if (optionType === 'object') {
@@ -57,12 +58,23 @@ class Toast {
     this.toastInnerDOM.className += this.class.toastInner;
     this.toastTextDOM.className += this.class.toastText;
   }
-  show(text) {
+  show(str) {
+    let optionType = this.getType(str);
     if (this.toastDOM) {
-      if (typeof text !== 'undefined') {
-        this.toastTextDOM.innerHTML = text;
+      if (optionType === 'string' || optionType === 'number') {
+        this.toastTextDOM.innerHTML = str;
       }
       this.toastDOM.style.display = 'block';
+    }
+    if (this.delay !== null) {
+      this.delay = this.delay - 0;
+      if (this.getType(this.delay) === 'number') {
+        setTimeout(() => {
+          this.hide();
+        }, this.delay);
+      } else {
+        console.error('delay value should be number.')
+      }
     }
   }
   hide() {
@@ -100,7 +112,7 @@ Object.assign(Toast.prototype, {
   getID(length) {
     return Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
   },
-  getOptionType(obj) {
+  getType(obj) {
     var toString = Object.prototype.toString;
     var map = {
       '[object Boolean]' : 'boolean',
