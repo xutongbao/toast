@@ -1,6 +1,6 @@
 {
-  "name": "toast",
-  "version": "1.0.1",
+  "name": "toast-xu",
+  "version": "1.0.7",
   "description": "A simple JavaScript toast for web.",
   "main": "index.js",
   "scripts": {
@@ -31,8 +31,9 @@
     "webpack-cli": "^3.1.2"
   },
   "keywords": [
-    "react",
+    "toast-xu",
     "toast",
+    "react",
     "util",
     "utility"
   ]
