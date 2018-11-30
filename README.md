@@ -70,12 +70,65 @@ let myToast = new Toast({
 myToast.show();
 ```
 
-html content:
+html str content:
 ```js
 let myToast = new Toast({
   html: '<div style="line-height:100px;font-size:50px; color:#f66f0c;">Toast</div>'
 });
 myToast.show();
+```
+
+dom content:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,height=device-height">
+  <title>demo07(dom_content)</title>
+  <style>
+  </style>
+</head>
+<body>
+<div id="m-toast" style="line-height:100px;font-size:50px; color:#f66f0c;">Toast</div>
+<script src="../dist/bundle.js"></script>
+<script>
+let dom = document.getElementById('m-toast');
+let myToast = new Toast({
+  html: dom
+});
+myToast.show();
+</script>
+</body>
+</html>
+```
+
+tpl content:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,height=device-height">
+  <title>demo08(tpl_content)</title>
+  <style>
+  </style>
+</head>
+<body>
+<script type="text/html" id="m-toast-tpl">
+	<div style="line-height:100px;font-size:50px; color:#f66f0c;">Toast</div>	
+</script>
+<script src="../dist/bundle.js"></script>
+<script>
+let dom = document.getElementById('m-toast-tpl').innerHTML;
+let myToast = new Toast({
+  html: dom
+});
+myToast.show();
+</script>
+</body>
+</html>
+
 ```
 
 ## License

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,height=device-height">
+  <title>demo08(tpl_content)</title>
+  <style>
+  </style>
+</head>
+<body>
+<script type="text/html" id="m-toast-tpl">
+	<div style="line-height:100px;font-size:50px; color:#f66f0c;">Toast</div>	
+</script>
+<script src="../dist/bundle.js"></script>
+<script>
+let dom = document.getElementById('m-toast-tpl').innerHTML;
+let myToast = new Toast({
+  html: dom
+});
+myToast.show();
+</script>
+</body>
+</html>
