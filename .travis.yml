@@ -10,5 +10,3 @@ node_js:
   - "10"
 script:
   - npm run start
-  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
-  - codecov  
