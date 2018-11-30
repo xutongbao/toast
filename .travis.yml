@@ -3,9 +3,12 @@ before_install:
   - "npm install npm -g"
 install:
   - npm install
+  - npm install -g codecov
 node_js:
   - "stable"
   - "9"
   - "10"
 script:
   - npm run start
+  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
+  - codecov  
