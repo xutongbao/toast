@@ -8,13 +8,14 @@ const styles = require('./index.module.scss');
 class Toast {
   constructor(option) {
     this.text = '';
+    this.html = '';
     this.class = {
       toast: '',
       toastInner: '',
       toastText: ''      
     };
     let optionType = this.getOptionType(option);
-    if (optionType === 'string') {
+    if (optionType === 'string' || optionType === 'number') {
       this.text = option;
     } else if (optionType === 'object') {
       Object.assign(this, option);
@@ -24,6 +25,13 @@ class Toast {
       console.error('option error!');
       return;
     }
+    this.text = this.escapeHtml(this.text);
+    this.content = '';
+    if (this.html) {
+      this.content = this.html;
+    } else if (this.text) {
+      this.content = this.text;
+    }
     let toastID = this.getID(6);
     let toastInnerID = this.getID(6);
     let toastTextID = this.getID(6);
@@ -31,7 +39,7 @@ class Toast {
       `<div id=${toastID} class="m-toast"}>
         <div id=${toastInnerID} class="m-toast-inner"}>
           <div id=${toastTextID} class="m-toast-text"}>
-            ${this.text}
+            ${this.content}
           </div>
         </div>    
       </div>`;        
@@ -104,7 +112,10 @@ Object.assign(Toast.prototype, {
       '[object Object]'  : 'object'
     };
     return map[toString.call(obj)];
-  } 
+  },
+  escapeHtml(str) {
+    return (str + '').replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  },  
 });
 
 module.exports = Toast;

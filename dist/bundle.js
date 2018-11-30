@@ -126,7 +126,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, ".src_m-toast__1I0YG {\n  display: none;\n  position: fixed;\n  width: 100%;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  overflow: auto;\n  text-align: center; }\n\n.src_m-toast-inner__1uGGD {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  width: 100%;\n  transform: translate(-50%, -50%);\n  -webkit-transform: translate(-50%, -50%);\n  text-align: center; }\n\n.src_m-toast-text__2JA0z {\n  display: inline-block;\n  margin: 0 22px;\n  padding: 19px 21px;\n  font-size: 16px;\n  color: #FFFFFF;\n  letter-spacing: 0;\n  line-height: 22px;\n  background: rgba(0, 0, 0, 0.72);\n  border-radius: 10px; }\n", ""]);
+exports.push([module.i, ".src_m-toast__1I0YG {\n  display: none;\n  position: absolute;\n  width: 100%;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  overflow: auto;\n  text-align: center; }\n\n.src_m-toast-inner__1uGGD {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  width: 100%;\n  transform: translate(-50%, -50%);\n  -webkit-transform: translate(-50%, -50%);\n  text-align: center; }\n\n.src_m-toast-text__2JA0z {\n  display: inline-block;\n  margin: 0 22px;\n  padding: 19px 21px;\n  font-size: 16px;\n  color: #FFFFFF;\n  letter-spacing: 0;\n  line-height: 22px;\n  background: rgba(0, 0, 0, 0.72);\n  border-radius: 10px; }\n", ""]);
 
 // exports
 exports.locals = {
@@ -746,6 +746,7 @@ var Toast =
 function () {
   function Toast(option) {
     this.text = '';
+    this.html = '';
     this.class = {
       toast: '',
       toastInner: '',
@@ -753,7 +754,7 @@ function () {
     };
     var optionType = this.getOptionType(option);
 
-    if (optionType === 'string') {
+    if (optionType === 'string' || optionType === 'number') {
       this.text = option;
     } else if (optionType === 'object') {
       Object.assign(this, option);
@@ -764,10 +765,19 @@ function () {
       return;
     }
 
+    this.text = this.escapeHtml(this.text);
+    this.content = '';
+
+    if (this.html) {
+      this.content = this.html;
+    } else if (this.text) {
+      this.content = this.text;
+    }
+
     var toastID = this.getID(6);
     var toastInnerID = this.getID(6);
     var toastTextID = this.getID(6);
-    var tpl = "<div id=" + toastID + " class=\"m-toast\"}>\n        <div id=" + toastInnerID + " class=\"m-toast-inner\"}>\n          <div id=" + toastTextID + " class=\"m-toast-text\"}>\n            " + this.text + "\n          </div>\n        </div>    \n      </div>";
+    var tpl = "<div id=" + toastID + " class=\"m-toast\"}>\n        <div id=" + toastInnerID + " class=\"m-toast-inner\"}>\n          <div id=" + toastTextID + " class=\"m-toast-text\"}>\n            " + this.content + "\n          </div>\n        </div>    \n      </div>";
     tpl = this.buildTpl(tpl, styles);
     var div = document.createElement('div');
     div.innerHTML = tpl;
@@ -849,6 +859,9 @@ Object.assign(Toast.prototype, {
       '[object Object]': 'object'
     };
     return map[toString.call(obj)];
+  },
+  escapeHtml: function escapeHtml(str) {
+    return (str + '').replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 });
 module.exports = Toast;

@@ -70,6 +70,14 @@ let myToast = new Toast({
 myToast.show();
 ```
 
+html content:
+```js
+let myToast = new Toast({
+  html: '<div style="line-height:100px;font-size:50px; color:#f66f0c;">Toast</div>'
+});
+myToast.show();
+```
+
 ## License
 
 [MIT](LICENSE). Copyright (c) 2018 Xu Tongbao.
