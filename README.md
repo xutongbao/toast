@@ -2,6 +2,7 @@ Toast
 ===========
 
 [![Version](https://img.shields.io/npm/v/toast-xu.svg)](https://www.npmjs.com/package/toast-xu)
+[![Build Status](https://travis-ci.org/xutongbao/toast.svg?branch=master)](https://travis-ci.org/xutongbao/toast)
 
 A simple JavaScript toast for web.
 
