@@ -3,6 +3,7 @@ Toast
 
 [![Version](https://img.shields.io/npm/v/toast-xu.svg)](https://www.npmjs.com/package/toast-xu)
 [![Build Status](https://travis-ci.org/xutongbao/toast.svg?branch=master)](https://travis-ci.org/xutongbao/toast)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://www.npmjs.com/package/toast-xu)
 
 A simple JavaScript toast for web.
 
